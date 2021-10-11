@@ -20,13 +20,13 @@ import com.collegemanagement.rest.services.DepartmentService;
 @RestController
 @RequestMapping("/collegeService")
 public class CollegeController {
-	
+
 	@Autowired
 	private CollegeService collegeService;
-	
+
 	@Autowired
 	private DepartmentService deptService;
-	
+
 	@PostMapping("/add-college")
 	public String saveCollege(@RequestBody CollegeEntity college) {
 		return collegeService.addCollege(college);
@@ -36,22 +36,28 @@ public class CollegeController {
 	public List<CollegeEntity> getCollegeList() {
 		return collegeService.getCollegeList();
 	}
-	
+
 	@GetMapping("/college-by-id/{id}")
 	public CollegeEntity collegeById(@PathVariable int id) {
 		return collegeService.collegeById(id);
 	}
-	
+
 	@PostMapping("/saveDept")
 	public ResponseEntity<String> saveDeptDetails(@RequestBody CollegeEntity entity) {
 		System.out.println(entity.toString());
 		collegeService.addDept(entity);
-		String status="Department Details added successfully";
-		
-		return new ResponseEntity<String>(status,HttpStatus.CREATED);
-		
+		String status = "Department Details added successfully";
+
+		return new ResponseEntity<String>(status, HttpStatus.CREATED);
+
 	}
-	
-	
-	
+
+	@GetMapping("/depts/{collegeName}")
+	public ResponseEntity<List<DepartmentEntity>> getDeptDetailsByCollgeName(
+			@PathVariable("collegeName") String collegeName) {
+		List<DepartmentEntity> listOfDepts = deptService.getDeptDetailsByCollegeName(collegeName);
+		return new ResponseEntity<List<DepartmentEntity>>(listOfDepts, HttpStatus.OK);
+
+	}
+
 }
