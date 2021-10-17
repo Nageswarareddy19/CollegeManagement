@@ -22,6 +22,7 @@
 				<value>com.collegemanagement.rest.entity.CollegeEntity</value>
 				<value>com.collegemanagement.rest.entity.DepartmentEntity</value>
 				<value>com.collegemanagement.rest.entity.FacultyEntity</value>
+				<value>com.collegemanagement.rest.entity.UserEntity</value>
 			</list>
 			
 		</property>
